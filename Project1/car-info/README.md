@@ -38,6 +38,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - 引入Vant，移动端UI库
 - 规定数据流向
 - 二次封装axios，添加拦截器逻辑
+- Rem自适应
 
 - 首页逻辑
   - 图片懒加载
