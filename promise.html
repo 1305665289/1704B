@@ -13,24 +13,91 @@
          * Promise创建的几种方式：new Promise(), Promise.resolve(), Promise.reject()
          * Promise的静态方法：Promise.all(), Promise.race(), Promise.then(), Promise.catch(), Promise.finally()
          */
+        // function MyPromise(func){
+        //     // 封装Promise
+        //     this.status = 'pennding';   // pennding, fulfilled, rejected
+        //     func(this.wrapResolved.bind(this), this.wrapRejected.bind(this));
+
+        // }
+
+        // MyPromise.prototype.wrapResolved = function(val){
+        //     if (this.status == 'pennding'){
+        //         this.status = 'fulfilled';
+        //         setTimeout(()=>{
+        //             this.resolve && this.resolve(val);
+        //         });
+        //     }  
+        // }
+
+        // MyPromise.prototype.wrapRejected = function(val){
+        //     if (this.status == 'pennding'){
+        //         this.status = 'rejected';
+        //         setTimeout(()=>{
+        //             this.reject && this.reject(val);
+        //         });
+        //     }
+        // }
+
+        // MyPromise.prototype.then = function(resolve, reject){
+        //     this.resolve = resolve || function(){};
+        //     this.reject = reject || function(){};
+        // }
+
+        function MyPromise(func){
+            this.status = 'pennding';
+            func(this.resolve.bind(this), this.reject.bind(this));
+        }
+
+        MyPromise.prototype.resolve = function(val){
+            if (this.status == 'pennding'){
+                this.status = 'fulfilled';
+                this.resolveValue = val;
+            }
+        }
+
+        MyPromise.prototype.reject = function(val){
+            if (this.status == 'pennding'){
+                this.status = 'rejected';
+                this.rejectValue = val;
+            }
+        }
+
+        MyPromise.prototype.then = function(resolve, reject){
+            let inter = setInterval(()=>{
+                if (this.status == 'pennding'){
+                    return;
+                }
+                clearInterval(inter);
+                if (this.status == 'fulfilled'){
+                    resolve(this.resolveValue);
+                }else if(this.status == 'rejected'){
+                    reject(this.rejectValue);
+                }
+            }, 100);
+        }
+
+
         function ToPromise(num){
-            return new Promise((resolve, reject)=>{
+            return new MyPromise((resolve, reject)=>{
                 setTimeout(()=>{
                     resolve(num);
                 }, 100)
             })
         }
 
-        // console.log(ToPromise().then(res=>{
-        //     console.log('res1', res)
-        //     // return 100;
-        //     // return Promise.resolve(100);
+        console.log(ToPromise(8888).then(res=>{
+            console.log('res1', res)
+            // return 100;
+            // return Promise.resolve(100);
 
-        //     // return new Promise((resolve, rejetc)=>{
-        //     //     resolve(100);
-        //     // })
-        //     return Promise.reject(new Error('请求出错'));
-        // }, err=>{
+            // return new Promise((resolve, rejetc)=>{
+            //     resolve(100);
+            // })
+            // return Promise.reject(new Error('请求出错'));
+        }, err=>{
+            console.log('err1', err);
+        }));
+
         //     console.log('err1', err)
         // }).then(res=>{
         //     console.log('res2', res)
@@ -47,25 +114,38 @@
         // }));
 
 
-        /** Async/Await */
+        /** Async/Await 
+         * Generator函数的语法糖，自带执行器
+         * try...catch捕获一下错误
+         * 返回结果也是一个Promise
+        */
+        // async function MyAsync(){
+        //     try{
+        //         let res = await xhr();
+        //     }catch{
+
+        //     }
+
+        // }
+
 
         /** Generator 
          * Generator函数第一次调用返回一个任务迭代器
          * next()执行之后，会返回当前Generator函数的执行状态{value, done}
          * next()调用下一次传入的数据会作为上一次yield表达式的执行结果
         */
-        function * myGen(){
-            let res1 = yield ToPromise(100);
-            console.log('res1...', res1)
+        // function * myGen(){
+        //     let res1 = yield ToPromise(100);
+        //     console.log('res1...', res1)
            
-            let res2 = yield ToPromise(200);
-            console.log('res2...', res2)
+        //     let res2 = yield ToPromise(200);
+        //     console.log('res2...', res2)
 
-            let res3 = yield ToPromise(300);
-            console.log('res3...', res3);
+        //     let res3 = yield ToPromise(300);
+        //     console.log('res3...', res3);
 
-            return ToPromise(400);
-        }
+        //     return ToPromise(400);
+        // }
 
         // let i = myGen();
         // console.log(i.next());
@@ -73,31 +153,31 @@
         // console.log(i.next());
         // console.log(i.next());
 
-        function autoRun(gen){
-            // 1.拿到执行器
-            let i = gen();
+        // function autoRun(gen){
+        //     // 1.拿到执行器
+        //     let i = gen();
 
-            // 2.执行next，通过done的状态判读结束还是递归调用自己
-            function run(val){
-                let res = i.next(val);
-                if (res.done){
-                    return res.value;
-                }else{
-                    // return run(res.value);
-                    if (res.value.then){
-                        return res.value.then(val=>{
-                            return run(val);
-                        })
-                    }else{
-                        return run(res.value);
-                    }
-                }
-            }
+        //     // 2.执行next，通过done的状态判读结束还是递归调用自己
+        //     function run(val){
+        //         let res = i.next(val);
+        //         if (res.done){
+        //             return res.value;
+        //         }else{
+        //             // return run(res.value);
+        //             if (res.value.then){
+        //                 return res.value.then(val=>{
+        //                     return run(val);
+        //                 })
+        //             }else{
+        //                 return run(res.value);
+        //             }
+        //         }
+        //     }
 
-            return run();
-        }
+        //     return run();
+        // }
 
-        console.log(autoRun(myGen));
+        // console.log(autoRun(myGen));
     </script>
 </body>
 </html>
