@@ -50,7 +50,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 1. 百分百还原页面
 2. 百分百实现效果
 3. 优化交互动画
-4. 移动端兼容问题
+4. 移动端兼容问题  
     4.1 1px像素问题
     4.2 ios滑动卡顿
     4.3 键盘谈起，input框遮挡问题
@@ -72,3 +72,18 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 #### 图片页面
 1. 封装图片背景懒加载(手动实现)
+
+
+### 发布上线
+- [x] 区分vue的dist
+- [x] 服务端开启gzip
+- [x] 去掉sourceMap
+- [x] 修改publicPath（1.相对路径, 2.子路径）
+- [x] 使用XFTP把构建后的文件上传到服务器上
+- [x] 拼接线上路径
+- [x] 配置Https, 优化资源加载协议(把资源头部去掉，自适应当前页面的协议)
+- [x] 路由懒加载
+- [ ] UI库的按需加载
+- [ ] Vuex去掉Logger
+- [ ] 第三方依赖的抽离，发布到CDN
+- [ ] 优化资源加载，移动端300K以内
