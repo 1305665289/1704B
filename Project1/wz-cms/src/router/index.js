@@ -400,6 +400,30 @@ export const asyncRoutes = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 
+export const authorityRoutes = [
+  {
+    path: '/exam',
+    component: Layout,
+    meta: { title: '试题管理', icon: 'example'},
+    children: [{
+      path: 'add',
+      component: ()=>import('@/views/exam/index'),
+      name: 'Exam',
+      meta: {title: '添加试题', icon: 'dashboard', view_id: 'main-addQuestions'}
+    },{
+      path: 'classify',
+      component: ()=>import('@/views/exam/index'),
+      name: 'Exam',
+      meta: {title: '试题分类', icon: 'dashboard', view_id: 'main-questionsType'}
+    },{
+      path: 'view',
+      component: ()=>import('@/views/exam/index'),
+      name: 'Exam',
+      meta: {title: '查看试题', icon: 'dashboard', view_id: 'main-watchQuestions123131312'}
+    }]
+  }
+]
+
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),

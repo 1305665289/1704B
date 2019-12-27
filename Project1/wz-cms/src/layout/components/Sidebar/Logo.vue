@@ -24,8 +24,8 @@ export default {
   },
   data() {
     return {
-      title: 'Vue Element Admin',
-      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      title: '考试平台',
+      logo: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1577075301475&di=cc87e72a2ed86996419129c7d0c532c4&imgtype=0&src=http%3A%2F%2Fimg.25pp.com%2Fuploadfile%2Fapp%2Ficon%2F20151202%2F1449050193611485.jpg'
     }
   }
 }
