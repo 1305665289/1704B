@@ -7,7 +7,7 @@
       :on-success="handleImageSuccess"
       class="image-uploader"
       drag
-      action="https://httpbin.org/post"
+      action="//service.jasonandjay.com/upload"
     >
       <i class="el-icon-upload" />
       <div class="el-upload__text">

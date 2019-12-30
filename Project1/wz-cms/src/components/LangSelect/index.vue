@@ -27,6 +27,14 @@ export default {
       return this.$store.getters.language
     }
   },
+  // mounted(){
+  //   let lang = ['zh', 'es', 'en', 'ja'], index = 0;
+  //   // console.log('thi...', this);
+  //   setInterval(()=>{
+  //     this.$i18n.locale = lang[index++%4];
+  //     console.log('lang...', this.$i18n.locale);
+  //   }, 1000);
+  // },
   methods: {
     handleSetLanguage(lang) {
       this.$i18n.locale = lang

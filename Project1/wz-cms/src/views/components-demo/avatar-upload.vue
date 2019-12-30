@@ -16,7 +16,7 @@
       :key="imagecropperKey"
       :width="300"
       :height="300"
-      url="https://httpbin.org/post"
+      url="https://service.jasonandjay.com/upload"
       lang-type="en"
       @close="close"
       @crop-upload-success="cropSuccess"
@@ -40,9 +40,11 @@ export default {
   },
   methods: {
     cropSuccess(resData) {
+      console.log('resData...', resData);
       this.imagecropperShow = false
       this.imagecropperKey = this.imagecropperKey + 1
-      this.image = resData.files.avatar
+      // this.image = resData.files.avatar
+      this.image = resData[0].path
     },
     close() {
       this.imagecropperShow = false

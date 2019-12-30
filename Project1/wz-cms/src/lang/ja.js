@@ -1,4 +1,5 @@
 export default {
+  i18n: '国際化',
   route: {
     dashboard: 'トップ',
     documentation: 'ドキュメント',

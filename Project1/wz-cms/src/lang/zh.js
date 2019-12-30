@@ -1,4 +1,5 @@
 export default {
+  i18n: '国际化配置',
   route: {
     dashboard: '首页',
     documentation: '文档',
@@ -62,7 +63,13 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: '国际化',
     externalLink: '外链',
-    profile: '个人中心'
+    profile: '个人中心',
+    exam: {
+      title: '试题管理',
+      add: '添加试题',
+      view: '查看试题',
+      classify: '试题分类'
+    }
   },
   navbar: {
     dashboard: '首页',

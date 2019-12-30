@@ -108,6 +108,7 @@ export const constantRoutes = [
       }
     ]
   },
+  componentsRouter,
   {
     path: '/profile',
     component: Layout,
@@ -404,12 +405,12 @@ export const authorityRoutes = [
   {
     path: '/exam',
     component: Layout,
-    meta: { title: '试题管理', icon: 'example'},
+    meta: { title: 'exam.title', icon: 'example'},
     children: [{
       path: 'add',
       component: ()=>import('@/views/exam/index'),
       name: 'Exam',
-      meta: {title: '添加试题', icon: 'dashboard', view_id: 'main-addQuestions'}
+      meta: {title: 'exam.add', icon: 'dashboard', view_id: 'main-addQuestions'}
     },{
       path: 'classify',
       component: ()=>import('@/views/exam/index'),

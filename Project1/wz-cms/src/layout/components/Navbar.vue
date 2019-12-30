@@ -4,6 +4,7 @@
 
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
 
+    <button>{{$t('i18n')}}</button>
     <div class="right-menu">
       <template v-if="device!=='mobile'">
         <search id="header-search" class="right-menu-item" />

@@ -1,4 +1,5 @@
 export default {
+  i18n: 'Internacionalización',
   route: {
     dashboard: 'Panel de control',
     documentation: 'Documentación',
