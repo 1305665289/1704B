@@ -420,7 +420,23 @@ export const authorityRoutes = [
       path: 'view',
       component: ()=>import('@/views/exam/index'),
       name: 'Exam',
-      meta: {title: '查看试题', icon: 'dashboard', view_id: 'main-watchQuestions123131312'}
+      meta: {title: '查看试题', icon: 'dashboard', view_id: 'main-watchQuestions'}
+    }]
+  },
+  {
+    path: '/studnet',
+    component: Layout,
+    meta: {title: 'student.title', icon: 'example'},
+    children: [{
+      path: 'manage',
+      component: ()=>import('@/views/student/manage'),
+      name: 'Manage',
+      meta: {title: 'student.manage', icon: 'dashboard', view_id: 'main-addQuestions'}
+    },{
+      path: 'class',
+      component: ()=>import('@/views/student/manage'),
+      name: 'Manage',
+      meta: {title: 'student.class', icon: 'dashboard', view_id: 'main-addQuestions'}
     }]
   }
 ]
