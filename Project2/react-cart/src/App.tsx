@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Items from './components/Items';
+import useStore from './utils/useStore';
+import {useObserver} from 'mobx-react-lite';
+
 
 interface ItemType {
   id: number,
@@ -124,14 +127,16 @@ const initialState = [
   }
 ]
 const App: React.FC = () => {
-  const [list, setList] = useState<ItemType[]>([]);
+  let store = useStore();
+  let {cart} = store;
+  // console.log('list...', cart.list, 'store....', store);
 
   // 模拟didMount
   useEffect(() => {
-    setList(initialState);
+    cart.setList(initialState);
   }, []);
 
-  let totalNum = list.reduce((total: number, item: ItemType) => {
+  let totalNum = cart.list.reduce((total: number, item: ItemType) => {
     if (item.checked) {
       return total += item.num;
     } else {
@@ -139,7 +144,7 @@ const App: React.FC = () => {
     }
   }, 0)
 
-  let totalPrice = list.reduce((total: number, item: ItemType) => {
+  let totalPrice = cart.list.reduce((total: number, item: ItemType) => {
     if (item.checked) {
       return total += item.num * item.price;
     } else {
@@ -147,31 +152,15 @@ const App: React.FC = () => {
     }
   }, 0)
 
-  function changeCheck(id:number, checked:boolean){
-    let newList = [...list];
-    let index = newList.findIndex(value=>value.id===id);
-    newList[index].checked = checked;
-    setList(newList);
-  }
-
-  function changeNum(id:number, type:string){
-    let newList = [...list];
-    let index = newList.findIndex(value=>value.id===id);
-    type=='+'?newList[index].num++: newList[index].num--;
-    if (newList[index].num <= 0){
-      newList[index].num = 1;
-    }
-    setList(newList);
-  }
-
-  return <>
-    <Items list={list} changeCheck={changeCheck} changeNum={changeNum}></Items>
+  return useObserver(()=><>
+    <Items></Items>
+    <p>{cart.list.length}</p>
     <footer>
       <span>总数:{totalNum}</span>
       <span>总价：${totalPrice}</span>
       <button>立即支付</button>
     </footer>
-  </>
+  </>)
 }
 
 export default App;

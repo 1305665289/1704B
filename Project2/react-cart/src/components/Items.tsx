@@ -1,4 +1,7 @@
 import React from 'react';
+import {useObserver} from 'mobx-react-lite';
+import useStore from '../utils/useStore';
+
 interface ItemType {
     id: number,
     checked: boolean,
@@ -7,33 +10,33 @@ interface ItemType {
     price: number
 }
 interface PropsType {
-    list: ItemType[],
-    changeCheck: Function,
-    changeNum: Function
+    list?: ItemType[],
+    changeCheck?: Function,
+    changeNum?: Function
 }
 
 const Items: React.FC<PropsType> = props => {
+    let store = useStore();
+    let {cart} = store;
 
-    let changeCheck = (e:React.ChangeEvent<HTMLInputElement>, id: number)=>{
-        console.log('e...', e.target, e.target.checked);
-        props.changeCheck(id, e.target.checked);
-        return 100;
+    let change = (e:React.ChangeEvent<HTMLInputElement>, id: number)=>{
+        cart.changeCheck(id, e.target.checked);
     }
 
-    return <>{
-        props.list.map((item, index) => {
+    return useObserver(()=><>{
+        cart.list.map((item, index) => {
             return <li key={index}>
-                <input type="checkbox" name="" id="" checked={item.checked} onChange={e=>changeCheck(e, item.id)}/>
+                <input type="checkbox" name="" id="" checked={item.checked} onChange={e=>change(e, item.id)}/>
                 <span>{item.name}</span>
                 <span>${item.price}</span>
                 <div>
-                    <button onClick={()=>props.changeNum(item.id, '+')}>+</button>
+                    <button onClick={()=>cart.changeNum(item.id, '+')}>+</button>
                     <span>{item.num}</span>
-                    <button onClick={()=>props.changeNum(item.id, '-')}>-</button>
+                    <button onClick={()=>cart.changeNum(item.id, '-')}>-</button>
                 </div>
             </li>
         })
-    }</>
+    }</>)
 }
 
 export default Items;
