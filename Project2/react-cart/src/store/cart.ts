@@ -1,10 +1,33 @@
 import React from 'react'
 import {ItemType} from '../utils/type'
-import {observable, action} from 'mobx'
+import {observable, action, computed} from 'mobx'
 
 export default class CartStore{
     @observable
     list: ItemType[] = []
+
+    @computed
+    get totalNum(){
+        return this.list.reduce((total: number, item: ItemType) => {
+            if (item.checked) {
+                return total += item.num;
+            } else {
+                return total;
+            }
+        }, 0)
+    }
+
+    @computed
+    get totalPrice(){
+        return  this.list.reduce((total: number, item: ItemType) => {
+            if (item.checked) {
+              return total += item.num * item.price;
+            } else {
+              return total;
+            }
+        }, 0)
+    }
+
 
     @action
     setList(list: ItemType[]){

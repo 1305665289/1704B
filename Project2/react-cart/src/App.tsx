@@ -129,35 +129,18 @@ const initialState = [
 const App: React.FC = () => {
   let store = useStore();
   let {cart} = store;
-  // console.log('list...', cart.list, 'store....', store);
 
   // 模拟didMount
   useEffect(() => {
     cart.setList(initialState);
   }, []);
 
-  let totalNum = cart.list.reduce((total: number, item: ItemType) => {
-    if (item.checked) {
-      return total += item.num;
-    } else {
-      return total;
-    }
-  }, 0)
-
-  let totalPrice = cart.list.reduce((total: number, item: ItemType) => {
-    if (item.checked) {
-      return total += item.num * item.price;
-    } else {
-      return total;
-    }
-  }, 0)
 
   return useObserver(()=><>
     <Items></Items>
-    <p>{cart.list.length}</p>
     <footer>
-      <span>总数:{totalNum}</span>
-      <span>总价：${totalPrice}</span>
+      <span>总数:{cart.totalNum}</span>
+      <span>总价：${cart.totalPrice}</span>
       <button>立即支付</button>
     </footer>
   </>)
