@@ -2,6 +2,10 @@ import React from 'react'
 import RouterView from './RouterView'
 import {Link} from 'react-router-dom'
 
+// 引入一级路由
+// 引入二级路由
+const Home = React.lazy(() => import('../view/main/Home'));
+
 export default {
     routes: [{
         path: '/login',
@@ -20,7 +24,7 @@ export default {
         </>),
         children: [{
             path: '/main/home',
-            component: ()=><p>首页</p>
+            component: Home
         },{
             path: '/main/classify',
             component: ()=><p>分类</p>
@@ -33,6 +37,6 @@ export default {
         }]
     },{
         from: '*',
-        to: '/login'
+        to: '/main/home'
     }]
 }

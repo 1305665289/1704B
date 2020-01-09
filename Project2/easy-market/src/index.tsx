@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Suspense} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './router/index';
@@ -8,5 +8,7 @@ import store from './store/index'
 
 
 ReactDOM.render(<StoreContext.Provider value={store}>
-    <App />
+    <Suspense fallback={<div>Loading...</div>}>
+        <App />
+    </Suspense>
 </StoreContext.Provider>, document.getElementById('root'));
