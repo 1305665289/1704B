@@ -18,6 +18,8 @@ export default class CartStore {
     @action
     async getData() {
         let res = await getData();
-        this.data = res.data;
+        if (res?.data){
+            this.data = res.data;
+        }
     }
 }

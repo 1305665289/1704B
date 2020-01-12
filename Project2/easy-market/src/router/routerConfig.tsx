@@ -5,6 +5,8 @@ import {Link} from 'react-router-dom'
 // 引入一级路由
 // 引入二级路由
 const Home = React.lazy(() => import('../view/main/Home'));
+const Classify = React.lazy(() => import('../view/main/Classify'));
+
 
 export default {
     routes: [{
@@ -27,7 +29,7 @@ export default {
             component: Home
         },{
             path: '/main/classify',
-            component: ()=><p>分类</p>
+            component: Classify
         },{
             path: '/main/cart',
             component: ()=><p>购物车</p>

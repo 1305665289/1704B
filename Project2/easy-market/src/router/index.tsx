@@ -18,13 +18,13 @@ export default ()=>{
     </Router>
 }
 
-let token = '';
-const beforeEach = (location?:any)=>{
-    console.log('location...', location, history);
-    // 根据cookie中是否有登录态，和去的页面是否是登陆页面判断
-    if (!token && location.pathname !== '/login'){
-        history.push({pathname:'/login'});
-    }
-}
-const unListen = history.listen(beforeEach);
-// beforeEach(history.location);
+// let token = '';
+// const beforeEach = (location?:any)=>{
+//     console.log('location...', location, history);
+//     // 根据cookie中是否有登录态，和去的页面是否是登陆页面判断
+//     if (!token && location.pathname !== '/login'){
+//         history.push({pathname:'/login'});
+//     }
+// }
+// const unListen = history.listen(beforeEach);
+// // beforeEach(history.location);
