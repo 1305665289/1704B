@@ -1,30 +1,38 @@
 import React, {useState, useEffect} from 'react'
-import {getHospitalProvince} from '../services/index'
+import {getTrace} from '../services/index'
 
-interface ProType {
-    provinceName: string
-    citys: any[],
-    cityCnt: number
+interface TraceType{
+    time: string,
+    create_time: string,
+    source: string,
+    desc: string,
+    title: string
 }
 
-const Hospital = ()=>{
-    // 定义全国医院数据
-    let [provinces, setProvinces] = useState<ProType[]>([]);
+const Trace = ()=>{
+    // 定义最新进展
+    let [trace, setTrace] = useState<TraceType[]>([]);
 
-    // 获取全国医院数据
+    // 获取最新进展数据
     useEffect(()=>{
-        getHospitalProvince().then((res:any)=>{
-        res = res.data;
-        if(res.code == 0){
-            setProvinces(res.args.rsp.provinces);
-        }
+        getTrace().then((res:any)=>{
+            let data = JSON.parse(res.data) as TraceType[];
+            data.sort((a, b)=>{
+                if (a.time > b.time){
+                    return -1;
+                }else{
+                    return 1;
+                }
+            })
+            setTrace(data);
         })
     }, []);
     
+    console.log('trace...', trace);
     return <>
-    
+        <h3>最新进展</h3>
     </>
 }
 
 
-export default Hospital
+export default Trace
