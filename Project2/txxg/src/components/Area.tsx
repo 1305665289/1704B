@@ -1,30 +1,18 @@
 import React, {useState, useEffect} from 'react'
-import {getHospitalProvince} from '../services/index'
+import {AreaType} from '../utils/types'
 
-interface ProType {
-    provinceName: string
-    citys: any[],
-    cityCnt: number
-}
+const Area = (props: {areaTree:AreaType []})=>{
 
-const Hospital = ()=>{
-    // 定义全国医院数据
-    let [provinces, setProvinces] = useState<ProType[]>([]);
-
-    // 获取全国医院数据
-    useEffect(()=>{
-        getHospitalProvince().then((res:any)=>{
-        res = res.data;
-        if(res.code == 0){
-            setProvinces(res.args.rsp.provinces);
-        }
-        })
-    }, []);
-    
+    console.log('area...', props.areaTree);
     return <>
-    
+        <div>
+            <h3>国内病例</h3>
+        </div>
+        <div>
+            <h3>海外国家</h3>
+        </div>
     </>
 }
 
 
-export default Hospital
+export default Area
