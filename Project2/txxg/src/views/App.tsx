@@ -42,7 +42,7 @@ const App = () => {
   return (
     <div className="App">
       {/* 图表显示疫情 */}
-      <Chart chinaDayAddList={dayAddList}/>
+      <Chart chinaDayAddList={dayAddList} chinaDayList={dayList}/>
       {/* 疫情速报 */}
       <News areaTree={areaTree.length?areaTree[0].children as AreaType[]:[]}/>
       {/* 疫情概况 */}
