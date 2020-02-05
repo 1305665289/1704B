@@ -79,7 +79,7 @@ const News = (props: {areaTree: AreaType[]}) => {
     // 拼接各省份选项
     const provinceHtml = [];
     for (let key in ProvinceList){
-        provinceHtml.push(<option value={key}>{ProvinceList[key]}</option>);
+        provinceHtml.push(<option key={ProvinceList[key]} value={key}>{ProvinceList[key]}</option>);
     }
     return <>
         <div>
