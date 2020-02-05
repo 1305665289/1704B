@@ -25,6 +25,8 @@ const Trace = ()=>{
                 }
             })
             setTrace(data);
+        }).catch(e=>{
+            console.log('e...', e);
         })
     }, []);
     

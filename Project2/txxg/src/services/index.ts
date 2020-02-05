@@ -51,3 +51,8 @@ export const getDisease = ()=>{
         })
     })
 }
+
+// 省份疫情防治列表
+export const getProvinceNews = (code: string)=>{
+    return axios.post('/api/news/v1/province/news/list?province_code='+code);
+}

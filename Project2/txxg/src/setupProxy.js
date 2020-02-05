@@ -22,4 +22,11 @@ module.exports = function (app) {
             '^/inews': ''
         }    
     }));
+    app.use(proxy('/api', { 
+        target: 'https://api.dreamreader.qq.com' ,
+        changeOrigin: true,
+        pathRewrite: {
+            '^/api': ''
+        }    
+    }));
 };

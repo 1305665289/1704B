@@ -10,6 +10,9 @@ import Trace from '../components/Trace'
 import Hospital from '../components/Hospital';
 import Truth from '../components/Truth';
 import Tip from '../components/Tip';
+import News from '../components/News';
+import Chart from '../components/Chart';
+
 
 const App = () => {
   // 疫情概况
@@ -38,6 +41,10 @@ const App = () => {
 
   return (
     <div className="App">
+      {/* 图表显示疫情 */}
+      <Chart chinaDayAddList={dayAddList}/>
+      {/* 疫情速报 */}
+      <News areaTree={areaTree.length?areaTree[0].children as AreaType[]:[]}/>
       {/* 疫情概况 */}
       <Header total={total as TotalType}/>
       {/* 疫情区域分布 */}

@@ -32,5 +32,5 @@ export interface AreaType{
         dead: number,
         heal: number
     },
-    children?: AreaType
+    children?: AreaType[]
 }
