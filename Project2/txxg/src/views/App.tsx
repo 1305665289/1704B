@@ -12,6 +12,7 @@ import Truth from '../components/Truth';
 import Tip from '../components/Tip';
 import News from '../components/News';
 import Chart from '../components/Chart';
+import Map from '../components/Map';
 
 
 const App = () => {
@@ -23,6 +24,8 @@ const App = () => {
   let [dayList, setDayList] = useState([]);
   // 每日新增数据
   let [dayAddList, setDayAddList] = useState([]);
+  // 全国疫情分布
+  let [countryData, setCountryData] = useState([]);
 
 
   // 请求疫情数据
@@ -36,11 +39,20 @@ const App = () => {
       setAreaTree(areaTree);
       setDayList(chinaDayList)
       setDayAddList(chinaDayAddList);
+      let countryData = areaTree[0].children.map((item: any)=>{
+        return {
+          name: item.name,
+          value: item.total.confirm
+        }
+      })
+      setCountryData(countryData);
     })
   }, []);
 
   return (
     <div className="App">
+      {/* 疫情分布地图展示 */}
+      <Map countryData={countryData}/>
       {/* 图表显示疫情 */}
       <Chart chinaDayAddList={dayAddList} chinaDayList={dayList}/>
       {/* 疫情速报 */}
