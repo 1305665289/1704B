@@ -1,7 +1,16 @@
 ### 腾讯新冠肺炎病毒传播H5
 
+- 线上原型
+```js
+https://news.qq.com/zt2020/page/feiyan.htm
+```
+- 接口文档地址
+```js
+https://www.showdoc.cc/txxg?page_id=3836921478951602
+```
+
 - 技术架构
-    - react
+    - react+hooks
     - typescript
     - axios+jsonp
     - bizcharts
@@ -16,9 +25,14 @@
     - [x] 定点医院查找
     - [x] 消息辟谣
     - [x] 防护知识
-    - [ ] Canvas合成图片
+    - [ ] Canvas合成疫情海报
     - [ ] 微信和其他APP内的分享传播
     - [x] 打包上线
+
+- 本地开发
+```js
+cnpm i && npm run start
+```
 
 - 打包上线
     - 代理的切换，三种跨域情况上线处理
