@@ -28,3 +28,6 @@
 - 出栈时触发 onHide, onUnload
 - 如果没有进出栈，页面显示触发 onShow
 - 如果没有进出栈，页面隐藏触发 onHide
+
+### 作业：在我的页面使用Mock.js实现小程序瀑布流
+借助Page的onPageScroll事件
