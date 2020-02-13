@@ -5,10 +5,12 @@
     "pages/my/index"
   ],
   "window": {
+    "navigationBarBackgroundColor": "#007ACC",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#4A4A4A"
+
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",

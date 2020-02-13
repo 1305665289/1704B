@@ -60,6 +60,13 @@
 					"pathName": "pages/date/index",
 					"query": "start=2009-12-21",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的页面",
+					"pathName": "pages/my/index",
+					"query": "start=2009-12-21",
+					"scene": null
 				}
 			]
 		}

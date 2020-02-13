@@ -1,67 +1,30 @@
 //index.js
 //获取应用实例
+const imgs = require('../../utils/img')
 const app = getApp()
+
 
 Page({
   data: {
-    birthday: 0,
-    year: 0,
-    month: 0,
-    distance: 0,
-    end: '',
-    percent: 0
-  },
-  onLoad(options){
-    // 在这里获取路由传参，赋给this
-  },
-  onReady(){
-    // 不怎么使用
+    columns: []
   },
   onShow(){
-    // 统一在这里发起网络请求和一些初始化的工作
-    let now = new Date();
+    console.log('imgs....', imgs);
     this.setData({
-      end: `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}`
+      columns: [imgs.slice(0, 30), imgs.slice(30, 60), imgs.slice(60, 90)]
     })
   },
-  onHide(){
-
+  onPullDownRefresh(){
+    console.log('用户触发了下拉操作....');
   },
-  onUnload(){
-
+  onReachBottom(){
+    console.log('用户触发了上拉加载操作.....');
   },
-  changeBirthday(e){
-    console.log('e...', e);
-    let value = e.detail.value.split('-');
-    let distance = this.getDistanceMonth(e.detail.value, this.data.end);
-    
-    this.setData({
-      birthday: e.detail.value,
-      year: value[0],
-      month: value[1],
-      distance,
-      percent: (distance/9).toFixed(0)
-    })
-  },
-  // pre 2020-02 now 2019-12
-  getDistanceMonth(pre, now){
-    let preArr = pre.split('-'),
-        nowArr = now.split('-');
-    return Number((nowArr[0]-preArr[0])*12) + Number(nowArr[1]-preArr[1])
-  },
-  clear(){
-    let now = new Date();
-    this.setData({
-      birthday: 0,
-      month: String(now.getMonth()+1).padStart(2, '0'),
-      year: now.getFullYear(),
-      distance: 0
-    })
-  },
-  goDate(){
-    console.log('go date');
-    wx.switchTab({ url: '/pages/date/index', complete: (res)=>{
-      console.log('res...', res);
-    } });
+  onShareAppMessage(info){
+    return {
+      title: '我的页面',
+      path: '/pages/my/index',
+      imageUrl: ''
+    }
   }
 })
