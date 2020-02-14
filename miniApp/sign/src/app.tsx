@@ -4,8 +4,9 @@ import { Provider } from '@tarojs/redux'
 import Index from './pages/index'
 
 import configStore from './store'
-
 import './app.scss'
+// 引入登陆的action
+import {login} from './services/index'
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
@@ -26,7 +27,8 @@ class App extends Component {
    */
   config: Config = {
     pages: [
-      'pages/index/index'
+      'pages/index/index',
+      'pages/map/index'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -36,7 +38,28 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {}
+  componentDidMount () {
+    // 发起请求
+    console.log('小程序挂载的生命周期')
+    wx.login({
+      async success (res) {
+        if (res.code) {
+          //发起网络请求
+          // console.log('code...', res.code)
+          // store.dispatch({
+          //   type: 'LOGIN',
+          //   payload: res.code
+          // });
+          let response = await login(res.code);
+          console.log('res...', response);
+          // 把openid存储到小程序的本地存储
+          wx.setStorageSync('openid', response.data.openid);
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    })
+  }
 
   componentDidShow () {}
 
@@ -55,4 +78,4 @@ class App extends Component {
   }
 }
 
-Taro.render(<App />, document.getElementById('app'))
+Taro.render(<App/>, document.getElementById('app'))
