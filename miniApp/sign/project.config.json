@@ -39,6 +39,13 @@
 					"id": -1,
 					"name": "地图页面",
 					"pathName": "pages/map/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "添加面试页面",
+					"pathName": "pages/sign/add/index",
 					"scene": null
 				}
 			]
